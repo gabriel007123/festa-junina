@@ -211,7 +211,46 @@
     &copy; 2025 Festa Junina - Projeto Interativo
   </div>
 </footer>
-
+      <script>
+        const maxFish = 10;
+        function randomPosition() {
+            const x = Math.random() * (gameContainer.clientWidth - 50);
+            const y = Math.random() * (gameContainer.clientHeight - 30);
+            return { x, y };
+        }
+        function createFish() {
+            const fish = document.createElement('img');
+            fish.src = 'https://placehold.co/50x30/png?text=🐟'; // Imagem de peixe
+            fish.classList.add('fish');
+            const pos = randomPosition();
+            fish.style.left = pos.x + 'px';
+            fish.style.top = pos.y + 'px';
+            fish.addEventListener('click', () => {
+                score++;
+                scoreEl.textContent = score;
+                gameContainer.removeChild(fish);
+            });
+            gameContainer.appendChild(fish);
+        }
+        function startGame() {
+            score = 0;
+            scoreEl.textContent = score;
+            gameContainer.innerHTML = '';
+            startBtn.disabled = true;
+            let fishCount = 0;
+            gameInterval = setInterval(() => {
+                if (fishCount >= maxFish) {
+                    clearInterval(gameInterval);
+                    alert('O jogo acabou! Sua pontuação final foi: ' + score);
+                    startBtn.disabled = false;
+                    return;
+                }
+                createFish();
+                fishCount++;
+            }, 1000);
+        }
+        startBtn.addEventListener('click', startGame);
+    </script>
 </head>
 </body>
 </html>
