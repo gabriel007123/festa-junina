@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Festa Junina - Interativo e Completo</title>
+<title>Festa Junina - Jogo de Pesca Interativo</title>
 <style>
   /* Reset and base */
   * {
@@ -309,90 +309,66 @@
     font-size: 1.2rem;
   }
 
-  /* Memory Game Section */
-  #memory-game {
+  /* Fishing Game Section */
+  #fishing-game {
     padding: 3rem 1rem 4rem;
     max-width: 860px;
     margin: 0 auto 4rem;
-    background: linear-gradient(135deg, #fcf8e8 0%, #f9e7c8 100%);
+    background: linear-gradient(135deg, #c7f0db 0%, #a0d8a3 100%);
     border-radius: 28px;
-    box-shadow: 0 14px 42px rgba(204, 62, 62, 0.17);
-  }
-  #memory-game p {
+    box-shadow: 0 14px 42px rgba(72, 150, 75, 0.25);
     text-align: center;
+  }
+  #fishing-game p {
     font-style: italic;
-    margin-bottom: 2rem;
+    margin-bottom: 1.8rem;
     font-weight: 600;
-    color: #cc3e3e;
-    user-select: none;
-    font-size: 1.15rem;
+    color: #2f682f;
+    font-size: 1.2rem;
   }
-  #memory-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(110px, 1fr));
-    gap: 1.4rem;
-  }
-  .card {
+  #fishpond {
     position: relative;
     width: 100%;
-    padding-top: 100%;
-    perspective: 1200px;
-    cursor: pointer;
-  }
-  .card-inner {
-    position: absolute;
-    inset: 0;
-    border-radius: 20px;
-    transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
-    transform-style: preserve-3d;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.12);
-  }
-  .card.flipped .card-inner {
-    transform: rotateY(180deg);
-  }
-  .card-front, .card-back {
-    position: absolute;
-    inset: 0;
-    border-radius: 20px;
-    backface-visibility: hidden;
-  }
-  .card-front {
-    background: linear-gradient(45deg, #ffb347, #ffcc33);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2.4rem;
-    box-shadow: inset 0 0 30px rgba(255, 204, 51, 0.85);
-  }
-  .card-front img {
-    max-width: 90%;
-    max-height: 90%;
+    height: 320px;
+    background: linear-gradient(to top, #107a1e, #5abe00 70%);
     border-radius: 16px;
-    user-select: none;
-    pointer-events: none;
+    overflow: hidden;
+    box-shadow: inset 0 0 30px rgba(15, 102, 22, 0.6);
+    margin-bottom: 1.5rem;
   }
-  .card-back {
-    background: #cc3e3e;
-    transform: rotateY(180deg);
-  }
-  #restart-btn {
-    display: block;
-    margin: 2rem auto 0 auto;
-    border-radius: 40px;
-    background: #cc3e3e;
-    color: white;
-    border: none;
-    padding: 14px 34px;
-    font-weight: 700;
-    font-size: 1.1rem;
+  .fish {
+    position: absolute;
+    width: 80px;
+    height: auto;
     cursor: pointer;
-    box-shadow: 0 12px 32px rgba(204, 62, 62, 0.55);
-    transition: background 0.3s ease;
+    user-select: none;
+    transition: transform 0.3s ease;
   }
-  #restart-btn:hover,
-  #restart-btn:focus {
-    background: #991b1b;
-    box-shadow: 0 18px 40px rgba(153, 27, 27, 0.75);
+  .fish:active {
+    transform: scale(0.9);
+  }
+  #scoreboard {
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: #256d24;
+    margin-bottom: 15px;
+  }
+  #start-btn, #restart-btn-fishing {
+    background: #2b7a0b;
+    padding: 12px 30px;
+    color: white;
+    font-weight: 700;
+    border-radius: 36px;
+    font-size: 1.1rem;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(37, 109, 36, 0.7);
+    margin: 0 10px;
+    transition: background-color 0.3s ease;
+  }
+  #start-btn:hover, #restart-btn-fishing:hover,
+  #start-btn:focus, #restart-btn-fishing:focus {
+    background: #195d08;
     outline: none;
   }
 
@@ -420,9 +396,6 @@
     #recipes .recipes-grid {
       grid-template-columns: 1fr;
     }
-    #memory-grid {
-      grid-template-columns: repeat(auto-fit,minmax(140px, 1fr));
-    }
   }
   @media (max-width: 480px) {
     .hero h1 {
@@ -431,13 +404,10 @@
     .recipe-card h3 {
       font-size: 1.3rem;
     }
-    #quiz button[type="submit"] {
+    #quiz button[type="submit"],
+    #start-btn, #restart-btn-fishing {
       padding: 1rem 2.5rem;
       font-size: 1rem;
-    }
-    #restart-btn {
-      font-size: 1rem;
-      padding: 12px 28px;
     }
   }
 </style>
@@ -452,7 +422,7 @@
       <ul>
         <li><a href="#recipes">Receitas</a></li>
         <li><a href="#quiz">Quiz</a></li>
-        <li><a href="#memory-game">Jogo da Memória</a></li>
+        <li><a href="#fishing-game">Jogo de Pesca</a></li>
         <li><a href="#tradicões">Tradições</a></li>
       </ul>
     </nav>
@@ -566,11 +536,17 @@
   </form>
 </section>
 
-<section id="memory-game" class="container" tabindex="0" aria-label="Jogo da memória da Festa Junina">
-  <h2 class="section-title">Jogo da Memória</h2>
-  <p>Toque nos cards para virar e combinar os símbolos da festa junina!</p>
-  <div id="memory-grid" role="grid" aria-label="Grid do jogo da memória"></div>
-  <button id="restart-btn" aria-label="Reiniciar o jogo" hidden>Reiniciar Jogo</button>
+<section id="fishing-game" class="container" tabindex="0" aria-label="Jogo de pesca da Festa Junina">
+  <h2 class="section-title">Jogo de Pesca</h2>
+  <p>Pesque os peixinhos coloridos e marque pontos! Clique nos peixes para pescar.</p>
+  <div id="scoreboard" role="status" aria-live="polite" aria-atomic="true" style="font-weight:700; font-size:1.3rem; color:#256d24; margin-bottom:16px;">
+    Pontos: 0
+  </div>
+  <div id="fishpond" aria-label="Tanque de peixes da festa junina" style="position:relative; width:100%; max-width:860px; height:320px; background: linear-gradient(to top, #107a1e, #5abe00 70%); border-radius:16px; overflow:hidden; box-shadow: inset 0 0 30px rgba(15,102,22,0.6); margin:auto;"></div>
+  <div style="margin-top:12px; text-align:center;">
+    <button id="start-btn" aria-label="Iniciar jogo de pesca">Iniciar Jogo</button>
+    <button id="restart-btn-fishing" aria-label="Reiniciar jogo de pesca" hidden>Reiniciar Jogo</button>
+  </div>
 </section>
 
 <footer role="contentinfo">
@@ -580,136 +556,98 @@
 </footer>
 
 <script>
-  // Quiz functionality
-  const quizForm = document.getElementById('quizForm');
-  const quizResult = document.getElementById('quiz-result');
-  const answers = { q1: 'b', q2: 'b' };
+    const fishImages = [
+        "https://placehold.co/80x50/png?text=Peixe+1",
+        "https://placehold.co/80x50/png?text=Peixe+2",
+        "https://placehold.co/80x50/png?text=Peixe+3",
+        "https://placehold.co/80x50/png?text=Peixe+4",
+        "https://placehold.co/80x50/png?text=Peixe+5",
+    ];
+    const fishpond = document.getElementById('fishpond');
+    const scoreboard = document.getElementById('scoreboard');
+    const startBtn = document.getElementById('start-btn');
+    const restartBtnFishing = document.getElementById('restart-btn-fishing');
 
-  quizForm.addEventListener('submit', e => {
-    e.preventDefault();
-    const formData = new FormData(quizForm);
+    let gameInterval = null;
     let score = 0;
-    for (const q of Object.keys(answers)) {
-      if (formData.get(q) === answers[q]) score++;
+    let fishingActive = false;
+    const maxFish = 10;
+
+    function randomPosition() {
+        const pondWidth = fishpond.clientWidth;
+        const pondHeight = fishpond.clientHeight;
+        const x = Math.random() * (pondWidth - 80);
+        const y = Math.random() * (pondHeight - 50);
+        return { x, y };
     }
-    const total = Object.keys(answers).length;
-    quizResult.textContent = `Você acertou ${score} de ${total} pergunta${total > 1 ? 's' : ''}. ${
-      score === total ? 'Parabéns! Você conhece a festa!' : 'Continue aprendendo e se divertindo!'
-    }`;
-    quizResult.focus();
-  });
 
-  // Memory game cards data
-  const cardsData = [
-    { img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/688082e0-0833-458c-9f05-ed5b9f82773a.png', alt: 'Fogueira da festa junina' },
-    { img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0d107321-5bf6-464f-b5af-9cffc9edaa4c.png', alt: 'Fogueira da festa junina' },
-    { img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/73479b7b-e41a-43b0-b561-40daf5a092c5.png', alt: 'Bandeirinhas coloridas' },
-    { img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/49f10687-a200-4473-9cec-207cea25fdfb.png', alt: 'Bandeirinhas coloridas' },
-    { img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c37eb450-ac4f-470a-b42e-d6a27ca39eb8.png', alt: 'Espiga de milho' },
-    { img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/06d6b51c-7b5f-40b1-ad9d-96b42bf145fa.png', alt: 'Espiga de milho' },
-    { img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/7fbb2ce5-8e02-44d7-9f0d-946b4adbd4e6.png', alt: 'Dança da quadrilha' },
-    { img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/47f4904a-7e3f-404e-93b5-672d8fe4918d.png', alt: 'Dança da quadrilha' },
-    { img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a9045948-babd-4290-bab3-06cc5c6cf6b9.png', alt: 'Balão de papel típico' },
-    { img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/93e26611-b10d-4c25-973d-b7fa2a2af893.png', alt: 'Balão de papel típico' },
-    { img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/17d1c403-86d1-44c4-a9ef-4241a8d461e9.png', alt: 'Doce pé de moleque' },
-    { img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/dcd7875a-59d0-4c2a-84a2-58411a526122.png', alt: 'Doce pé de moleque' }
-  ];
+    function createFish(id) {
+        const fish = document.createElement('img');
+        fish.src = fishImages[Math.floor(Math.random() * fishImages.length)];
+        fish.alt = "Peixinho da festa junina";
+        fish.classList.add('fish');
+        fish.style.position = 'absolute';
+        const pos = randomPosition();
+        fish.style.left = pos.x + 'px';
+        fish.style.top = pos.y + 'px';
+        fish.dataset.id = id;
 
-  const grid = document.getElementById('memory-grid');
-  const restartBtn = document.getElementById('restart-btn');
-  let flipped = [];
-  let matched = new Set();
-  let lock = false;
+        fish.addEventListener('click', () => {
+            if (!fishingActive) return;
+            fishpond.removeChild(fish);
+            score++;
+            updateScore();
+        });
 
-  function shuffle(array) {
-    let arr = array.slice();
-    for(let i = arr.length -1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i+1));
-      [arr[i], arr[j]] = [arr[j], arr[i]];
+        return fish;
     }
-    return arr;
-  }
 
-  function setupGame() {
-    grid.innerHTML = '';
-    flipped = [];
-    matched.clear();
-    lock = false;
-    restartBtn.hidden = true;
-    const shuffled = shuffle(cardsData);
-
-    shuffled.forEach((card, index) => {
-      const btn = document.createElement('button');
-      btn.className = 'card';
-      btn.type = 'button';
-      btn.setAttribute('aria-label', 'Card do jogo da memória');
-      btn.setAttribute('role', 'gridcell');
-      btn.dataset.index = index;
-
-      const inner = document.createElement('div');
-      inner.className = 'card-inner';
-
-      const front = document.createElement('div');
-      front.className = 'card-front';
-      const img = document.createElement('img');
-      img.src = card.img;
-      img.alt = card.alt;
-      img.loading = 'lazy';
-      front.appendChild(img);
-
-      const back = document.createElement('div');
-      back.className = 'card-back';
-
-      inner.appendChild(front);
-      inner.appendChild(back);
-      btn.appendChild(inner);
-
-      btn.addEventListener('click', () => flipCard(btn, shuffled));
-
-      grid.appendChild(btn);
-    });
-  }
-
-  function flipCard(card, cardsArray) {
-    if (lock) return;
-    if (flipped.includes(card)) return;
-    if (matched.has(card.dataset.index)) return;
-
-    card.classList.add('flipped');
-    flipped.push(card);
-
-    if (flipped.length === 2) {
-      lock = true;
-      setTimeout(() => checkMatch(cardsArray), 1100);
+    function updateScore() {
+        scoreboard.textContent = `Pontos: ${score}`;
     }
-  }
 
-  function checkMatch(cardsArray) {
-    const [first, second] = flipped;
-    if (!first || !second) {
-      lock = false;
-      return;
+    function startFishingGame() {
+        if (fishingActive) return;
+        score = 0;
+        updateScore();
+        fishpond.innerHTML = '';
+        fishingActive = true;
+        startBtn.hidden = true;
+        restartBtnFishing.hidden = true;
+
+        let fishCount = 0;
+
+        gameInterval = setInterval(() => {
+            if (fishCount >= maxFish) {
+                clearInterval(gameInterval);
+                fishingActive = false;
+                startBtn.hidden = true;
+                restartBtnFishing.hidden = false;
+                alert('O jogo acabou! Sua pontuação final foi: ' + score);
+                return;
+            }
+            const fish = createFish(fishCount);
+            fishpond.appendChild(fish);
+            fishCount++;
+
+            setTimeout(() => {
+                if (fishpond.contains(fish)) {
+                    fishpond.removeChild(fish);
+                }
+            }, 6000);
+        }, 900);
     }
-    const firstIndex = first.dataset.index;
-    const secondIndex = second.dataset.index;
 
-    if (cardsArray[firstIndex].img === cardsArray[secondIndex].img) {
-      matched.add(firstIndex);
-      matched.add(secondIndex);
-      if (matched.size === cardsArray.length) restartBtn.hidden = false;
-    } else {
-      first.classList.remove('flipped');
-      second.classList.remove('flipped');
+    function restartFishingGame() {
+        clearInterval(gameInterval);
+        fishpond.innerHTML = '';
+        score = 0;
+        updateScore();
+        startBtn.hidden = false;
+        restartBtnFishing.hidden = true;
+        fishingActive = false;
     }
-    flipped = [];
-    lock = false;
-  }
 
-  restartBtn.addEventListener('click', setupGame);
-
-  window.addEventListener('load', setupGame);
+    startBtn.addEventListener('click', startFishingGame);
+    restartBtnFishing.addEventListener('click', restartFishingGame);
 </script>
-
-</body>
-</html>
-
