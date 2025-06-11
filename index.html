@@ -445,18 +445,24 @@
       <div class="recipe-card-content">
         <h3>Pamonha</h3>
         <p>Deliciosa pamonha feita com milho verde e especiarias, um clássico da festa junina para saborear com a família.</p>
-        <script>
-    // Seleciona o botão da Pamonha pelo seu NOVO ID
-    const botaoPamonha = document.getElementById('btnVerReceitaPamonha'); 
+         <script>
+        // Seleciona o botão pelo seu ID
+        const botaoPamonha = document.getElementById('btnVerReceita');
 
-    // Adiciona um "ouvinte de evento" (event listener) para o clique no botão
-    botaoPamonha.addEventListener('click', function() {
-        // Define a URL da receita de pamonha
-        const urlReceita = 'receira2.html'; // Certifique-se que 'receita2.html' é a sua página da pamonha
+        // Adiciona um "ouvinte de evento" (event listener) para o clique no botão
+        botaoPamonha.addEventListener('click', function() {
+            // Define a URL da receita de canjica fornecida
+            const urlReceita = 'receira2.html';
 
-        // Redireciona o navegador para a URL da receita
-        window.location.href = urlReceita;
-    });
+            // Redireciona o navegador para a URL da receita
+            window.location.href = urlReceita;
+
+            // Se você quiser que a página da receita abra em uma nova aba,
+            // você usaria window.open(urlReceita, '_blank');
+            // Por exemplo:
+            // window.open(urlReceita, '_blank');
+            // window.location.href = urlReceita; // Remova esta linha se usar window.open
+        });
     </script>
       </div>
     </article>
