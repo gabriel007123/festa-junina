@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Festa Junina - Interativo e Completo</title>
+<style>
+  /* Reset and base */
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    font-family: 'Inter', sans-serif, Arial, sans-serif;
+    background: #fff7e6;
+    color: #3e3e3e;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  a {
+    color: #cc3e3e;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  a:hover,
+  a:focus {
+    text-decoration: underline;
+    outline-offset: 3px;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  button {
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    border: none;
+    border-radius: 32px;
+    padding: 12px 28px;
+    font-weight: 700;
+    font-size: 1rem;
+    color: #fff;
+    background: linear-gradient(90deg, #fcb045 0%, #fd1d1d 50%, #833ab4 100%);
+    transition: background-position 0.5s ease;
+    background-size: 200% 100%;
+  }
+  button:hover,
+  button:focus {
+    background-position: 100% 0;
+    outline: none;
+    box-shadow: 0 6px 15px rgb(253 29 29 / 0.6);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  /* Header */
+  header {
+    background: linear-gradient(90deg, #ffdb51 0%, #ff9238 100%);
+    padding: 1rem 0;
+    box-shadow: 0 6px 15px rgb(253 29 29 / 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  .header-inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logo {
+    font-weight: 900;
+    font-size: 2rem;
+    color: #5a1a01;
+    user-select: none;
+  }
+  nav ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    gap: 24px;
+  }
+  nav a {
+    font-weight: 600;
+    color: #5a1a01;
+    position: relative;
+    font-size: 1.1rem;
+  }
+  nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: #cc3e3e;
+    bottom: -5px;
+    left: 0;
+    transition: width 0.3s ease;
+  }
+  nav a:hover::after,
+  nav a:focus::after {
+    width: 100%;
+  }
+
+  /* Hero Banner */
+  .hero {
+    background: url('https://images.unsplash.com/photo-1515555237419-d19d7a5115b7?auto=format&fit=crop&w=1470&q=80') center/cover no-repeat;
+    padding: 6rem 1rem 5rem;
+    text-align: center;
+    color: #fff;
+    position: relative;
+    user-select: none;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(68, 18, 2, 0.5);
+    z-index: 0;
+  }
+  .hero-content {
+    position: relative;
+    max-width: 700px;
+    margin: 0 auto;
+    z-index: 1;
+  }
+  .hero h1 {
+    font-size: 3.5rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.85);
+  }
+  .hero p {
+    font-size: 1.35rem;
+    font-weight: 600;
+    margin-bottom: 2.5rem;
+    line-height: 1.5;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+  }
+  .hero button {
+    font-size: 1.1rem;
+    padding: 16px 46px;
+  }
+
+  /* Section title style */
+  h2.section-title {
+    font-weight: 900;
+    font-size: 2.25rem;
+    color: #cc3e3e;
+    margin: 3rem 0 1rem;
+    text-align: center;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    text-shadow: 0 0 3px rgba(204, 62, 62, 0.7);
+  }
+
+  /* Recipes Section */
+  #recipes {
+    background: linear-gradient(90deg, #fff3e8 0%, #ffb483 100%);
+    padding: 3rem 1rem 4rem;
+    border-radius: 24px;
+    box-shadow: 0 12px 24px rgba(255, 99, 77, 0.15);
+  }
+  #recipes .recipes-grid {
+    display: grid;
+    gap: 2.8rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+  .recipe-card {
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgb(253 29 29 / 0.15);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .recipe-card:hover,
+  .recipe-card:focus-within {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgb(253 29 29 / 0.3);
+    outline: none;
+  }
+  .recipe-card img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-bottom: 3px solid #cc3e3e;
+    transition: filter 0.3s ease;
+  }
+  .recipe-card:hover img,
+  .recipe-card:focus-within img {
+    filter: brightness(1.1);
+  }
+  .recipe-card-content {
+    padding: 1.3rem 1.75rem 2rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .recipe-card h3 {
+    margin: 0 0 0.7rem 0;
+    font-weight: 900;
+    font-size: 1.5rem;
+    color: #5a1a01;
+  }
+  .recipe-card p {
+    flex-grow: 1;
+    font-weight: 500;
+    color: #5a1a01;
+    line-height: 1.5;
+  }
+  .recipe-card button {
+    align-self: flex-start;
+    margin-top: 1.3rem;
+    background: #cc3e3e;
+    padding: 10px 26px;
+    font-size: 1rem;
+    border-radius: 24px;
+    box-shadow: 0 5px 12px rgba(204, 62, 62, 0.4);
+    transition: background 0.3s ease;
+  }
+  .recipe-card button:hover, .recipe-card button:focus {
+    background: #991b1b;
+    box-shadow: 0 8px 16px rgba(153, 27, 27, 0.7);
+    outline: none;
+  }
+
+  /* Quiz Section */
+  #quiz {
+    padding: 3rem 1rem 4rem;
+    background: #fff0f0;
+    border-radius: 24px;
+    box-shadow: 0 9px 28px rgba(204, 62, 62, 0.12);
+  }
+  #quiz form {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  .quiz-question {
+    font-weight: 700;
+    margin-top: 2rem;
+    margin-bottom: 1.2rem;
+    color: #7a2e2e;
+    font-size: 1.15rem;
+  }
+  .quiz-options {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 1.5rem;
+  }
+  .quiz-options li {
+    margin-bottom: 1rem;
+  }
+  .quiz-options label {
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-weight: 600;
+    color: #843434;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+  }
+  .quiz-options label:hover {
+    color: #cc3e3e;
+  }
+  .quiz-options input[type="radio"] {
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+  }
+  #quiz button[type="submit"] {
+    display: block;
+    margin: 3rem auto 0 auto;
+    padding: 1.1rem 3.2rem;
+    background: #cc3e3e;
+    color: white;
+    font-size: 1.2rem;
+    border-radius: 36px;
+    box-shadow: 0 8px 20px rgba(204, 62, 62, 0.55);
+    transition: background 0.3s ease;
+  }
+  #quiz button[type="submit"]:hover, #quiz button[type="submit"]:focus {
+    background: #991b1b;
+    box-shadow: 0 12px 26px rgba(153, 27, 27, 0.75);
+    outline: none;
+  }
+  #quiz-result {
+    margin-top: 1.5rem;
+    font-weight: 700;
+    color: #3e6b1a;
+    text-align: center;
+    min-height: 2rem;
+    font-size: 1.2rem;
+  }
+
+  /* Memory Game Section */
+  #memory-game {
+    padding: 3rem 1rem 4rem;
+    max-width: 860px;
+    margin: 0 auto 4rem;
+    background: linear-gradient(135deg, #fcf8e8 0%, #f9e7c8 100%);
+    border-radius: 28px;
+    box-shadow: 0 14px 42px rgba(204, 62, 62, 0.17);
+  }
+  #memory-game p {
+    text-align: center;
+    font-style: italic;
+    margin-bottom: 2rem;
+    font-weight: 600;
+    color: #cc3e3e;
+    user-select: none;
+    font-size: 1.15rem;
+  }
+  #memory-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(110px, 1fr));
+    gap: 1.4rem;
+  }
+  .card {
+    position: relative;
+    width: 100%;
+    padding-top: 100%;
+    perspective: 1200px;
+    cursor: pointer;
+  }
+  .card-inner {
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+  }
+  .card.flipped .card-inner {
+    transform: rotateY(180deg);
+  }
+  .card-front, .card-back {
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    backface-visibility: hidden;
+  }
+  .card-front {
+    background: linear-gradient(45deg, #ffb347, #ffcc33);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.4rem;
+    box-shadow: inset 0 0 30px rgba(255, 204, 51, 0.85);
+  }
+  .card-front img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 16px;
+    user-select: none;
+    pointer-events: none;
+  }
+  .card-back {
+    background: #cc3e3e;
+    transform: rotateY(180deg);
+  }
+  #restart-btn {
+    display: block;
+    margin: 2rem auto 0 auto;
+    border-radius: 40px;
+    background: #cc3e3e;
+    color: white;
+    border: none;
+    padding: 14px 34px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    box-shadow: 0 12px 32px rgba(204, 62, 62, 0.55);
+    transition: background 0.3s ease;
+  }
+  #restart-btn:hover,
+  #restart-btn:focus {
+    background: #991b1b;
+    box-shadow: 0 18px 40px rgba(153, 27, 27, 0.75);
+    outline: none;
+  }
+
+  /* Footer */
+  footer {
+    background: #4e7528;
+    color: white;
+    text-align: center;
+    padding: 2rem 1rem;
+    font-weight: 600;
+    font-size: 1rem;
+    user-select: none;
+    letter-spacing: 0.07em;
+  }
+
+  /* Responsive typography and layout */
+  @media (max-width: 768px) {
+    nav ul {
+      justify-content: center;
+      gap: 16px;
+    }
+    .hero h1 {
+      font-size: 2.4rem;
+    }
+    #recipes .recipes-grid {
+      grid-template-columns: 1fr;
+    }
+    #memory-grid {
+      grid-template-columns: repeat(auto-fit,minmax(140px, 1fr));
+    }
+  }
+  @media (max-width: 480px) {
+    .hero h1 {
+      font-size: 1.8rem;
+    }
+    .recipe-card h3 {
+      font-size: 1.3rem;
+    }
+    #quiz button[type="submit"] {
+      padding: 1rem 2.5rem;
+      font-size: 1rem;
+    }
+    #restart-btn {
+      font-size: 1rem;
+      padding: 12px 28px;
+    }
+  }
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <div class="logo" tabindex="0" aria-label="Logo Festa Junina Yoki">Festa Junina</div>
+    <nav aria-label="Menu principal">
+      <ul>
+        <li><a href="#recipes">Receitas</a></li>
+        <li><a href="#quiz">Quiz</a></li>
+        <li><a href="#memory-game">Jogo da Memória</a></li>
+        <li><a href="#tradicões">Tradições</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" role="banner" aria-label="Banner de festa junina com fogueira e bandeirinhas">
+  <div class="hero-content container">
+    <h1>Venha Curtir a Festa Junina!</h1>
+    <p>Sabores típicos, brincadeiras e muita diversão para toda a família. Descubra receitas, tradições e nossos jogos interativos!</p>
+    <a href="#recipes"><button aria-label="Ver receitas típicas da festa junina">Ver Receitas</button></a>
+  </div>
+</section>
+
+<section id="recipes" class="container" tabindex="0" aria-label="Receitas típicas da Festa Junina">
+  <h2 class="section-title">Receitas Típicas</h2>
+  <div class="recipes-grid" role="list">
+    <article class="recipe-card" role="listitem" tabindex="0" aria-label="Receita de Pamonha">
+      <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e3b37c20-a6fb-42a5-8a14-0ee48ce13006.png" alt="Foto de pamonha tradicional servida em folha verde" loading="lazy" />
+      <div class="recipe-card-content">
+        <h3>Pamonha</h3>
+        <p>Deliciosa pamonha feita com milho verde e especiarias, um clássico da festa junina para saborear com a família.</p>
+        <button aria-label="Ver receita da pamonha">Ver receita</button>
+      </div>
+    </article>
+
+    <article class="recipe-card" role="listitem" tabindex="0" aria-label="Receita de Canjica">
+      <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c79824c4-32b2-4c26-bbb9-8257e118cbaa.png" alt="Foto da canjica em uma tigela decorada com canela" loading="lazy" />
+      <div class="recipe-card-content">
+        <h3>Canjica</h3>
+        <p>Saborosa canjica cremosa, com milho cozido, leite de coco e um toque de canela para aquecer as noites da festa.</p>
+        <button aria-label="Ver receita da canjica">Ver receita</button>
+      </div>
+    </article>
+
+    <article class="recipe-card" role="listitem" tabindex="0" aria-label="Receita de Pé de Moleque">
+      <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/ba2e577e-c6cc-4e67-9db9-29767abc16d5.png" alt="Foto de pé de moleque, doce feito com amendoim e rapadura" loading="lazy" />
+      <div class="recipe-card-content">
+        <h3>Pé de Moleque</h3>
+        <p>Doce tradicional de amendoim e rapadura, crocante e perfeito para aproveitar a festa com muito sabor.</p>
+        <button aria-label="Ver receita do pé de moleque">Ver receita</button>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="tradicões" class="container" tabindex="0" aria-label="Tradições típicas da Festa Junina">
+  <h2 class="section-title">Tradições Típicas</h2>
+  <ul style="max-width: 800px; margin: 0 auto; font-size: 1.1rem; line-height: 1.7; color: #5a1a01; font-weight: 500; padding-left: 1.2rem;">
+    <li>Quadrilha – dança típica que representa uma festa de casamento caipira de forma divertida e animada.</li>
+    <li>Fogueira – ponto central da festa, símbolo de luz e proteção segundo tradições antigas.</li>
+    <li>Bandeirinhas coloridas – decoram o ambiente e criam um clima festivo contagiante.</li>
+    <li>Balões de papel – tradicionalmente usados em comemorações, apesar de proibidos em vários lugares devido ao risco de incêndios.</li>
+    <li>Comidas típicas – alimentos feitos com milho, amendoim e rapadura que representam a fartura da colheita.</li>
+  </ul>
+</section>
+
+<section id="quiz" class="container" tabindex="0" aria-label="Quiz interativo sobre a Festa Junina">
+  <h2 class="section-title">Quiz: Você conhece a Festa Junina?</h2>
+  <form id="quizForm" aria-live="polite" aria-atomic="true" aria-relevant="additions removals">
+    <div class="quiz-question" id="q1">
+      1. Qual dessas comidas NÃO é típica da Festa Junina?
+    </div>
+    <ul class="quiz-options" role="radiogroup" aria-labelledby="q1">
+      <li>
+        <label>
+          <input type="radio" name="q1" value="a" />
+          Pamonha
+        </label>
+      </li>
+      <li>
+        <label>
+          <input type="radio" name="q1" value="b" />
+          Churrasco
+        </label>
+      </li>
+      <li>
+        <label>
+          <input type="radio" name="q1" value="c" />
+          Pé de moleque
+        </label>
+      </li>
+    </ul>
+
+    <div class="quiz-question" id="q2">
+      2. Qual dança é tradicional na Festa Junina?
+    </div>
+    <ul class="quiz-options" role="radiogroup" aria-labelledby="q2">
+      <li>
+        <label>
+          <input type="radio" name="q2" value="a" />
+          Samba
+        </label>
+      </li>
+      <li>
+        <label>
+          <input type="radio" name="q2" value="b" />
+          Quadrilha
+        </label>
+      </li>
+      <li>
+        <label>
+          <input type="radio" name="q2" value="c" />
+          Forró
+        </label>
+      </li>
+    </ul>
+
+    <button type="submit" aria-label="Enviar respostas">Enviar Respostas</button>
+    <div id="quiz-result" role="region" aria-live="polite" tabindex="0"></div>
+  </form>
+</section>
+
+<section id="memory-game" class="container" tabindex="0" aria-label="Jogo da memória da Festa Junina">
+  <h2 class="section-title">Jogo da Memória</h2>
+  <p>Toque nos cards para virar e combinar os símbolos da festa junina!</p>
+  <div id="memory-grid" role="grid" aria-label="Grid do jogo da memória"></div>
+  <button id="restart-btn" aria-label="Reiniciar o jogo" hidden>Reiniciar Jogo</button>
+</section>
+
+<footer role="contentinfo">
+  <div class="container">
+    &copy; 2025 Festa Junina - Projeto Interativo
+  </div>
+</footer>
+
+<script>
+  // Quiz functionality
+  const quizForm = document.getElementById('quizForm');
+  const quizResult = document.getElementById('quiz-result');
+  const answers = { q1: 'b', q2: 'b' };
+
+  quizForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const formData = new FormData(quizForm);
+    let score = 0;
+    for (const q of Object.keys(answers)) {
+      if (formData.get(q) === answers[q]) score++;
+    }
+    const total = Object.keys(answers).length;
+    quizResult.textContent = `Você acertou ${score} de ${total} pergunta${total > 1 ? 's' : ''}. ${
+      score === total ? 'Parabéns! Você conhece a festa!' : 'Continue aprendendo e se divertindo!'
+    }`;
+    quizResult.focus();
+  });
+
+  // Memory game cards data
+  const cardsData = [
+    { img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/688082e0-0833-458c-9f05-ed5b9f82773a.png', alt: 'Fogueira da festa junina' },
+    { img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0d107321-5bf6-464f-b5af-9cffc9edaa4c.png', alt: 'Fogueira da festa junina' },
+    { img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/73479b7b-e41a-43b0-b561-40daf5a092c5.png', alt: 'Bandeirinhas coloridas' },
+    { img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/49f10687-a200-4473-9cec-207cea25fdfb.png', alt: 'Bandeirinhas coloridas' },
+    { img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c37eb450-ac4f-470a-b42e-d6a27ca39eb8.png', alt: 'Espiga de milho' },
+    { img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/06d6b51c-7b5f-40b1-ad9d-96b42bf145fa.png', alt: 'Espiga de milho' },
+    { img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/7fbb2ce5-8e02-44d7-9f0d-946b4adbd4e6.png', alt: 'Dança da quadrilha' },
+    { img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/47f4904a-7e3f-404e-93b5-672d8fe4918d.png', alt: 'Dança da quadrilha' },
+    { img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a9045948-babd-4290-bab3-06cc5c6cf6b9.png', alt: 'Balão de papel típico' },
+    { img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/93e26611-b10d-4c25-973d-b7fa2a2af893.png', alt: 'Balão de papel típico' },
+    { img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/17d1c403-86d1-44c4-a9ef-4241a8d461e9.png', alt: 'Doce pé de moleque' },
+    { img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/dcd7875a-59d0-4c2a-84a2-58411a526122.png', alt: 'Doce pé de moleque' }
+  ];
+
+  const grid = document.getElementById('memory-grid');
+  const restartBtn = document.getElementById('restart-btn');
+  let flipped = [];
+  let matched = new Set();
+  let lock = false;
+
+  function shuffle(array) {
+    let arr = array.slice();
+    for(let i = arr.length -1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i+1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+
+  function setupGame() {
+    grid.innerHTML = '';
+    flipped = [];
+    matched.clear();
+    lock = false;
+    restartBtn.hidden = true;
+    const shuffled = shuffle(cardsData);
+
+    shuffled.forEach((card, index) => {
+      const btn = document.createElement('button');
+      btn.className = 'card';
+      btn.type = 'button';
+      btn.setAttribute('aria-label', 'Card do jogo da memória');
+      btn.setAttribute('role', 'gridcell');
+      btn.dataset.index = index;
+
+      const inner = document.createElement('div');
+      inner.className = 'card-inner';
+
+      const front = document.createElement('div');
+      front.className = 'card-front';
+      const img = document.createElement('img');
+      img.src = card.img;
+      img.alt = card.alt;
+      img.loading = 'lazy';
+      front.appendChild(img);
+
+      const back = document.createElement('div');
+      back.className = 'card-back';
+
+      inner.appendChild(front);
+      inner.appendChild(back);
+      btn.appendChild(inner);
+
+      btn.addEventListener('click', () => flipCard(btn, shuffled));
+
+      grid.appendChild(btn);
+    });
+  }
+
+  function flipCard(card, cardsArray) {
+    if (lock) return;
+    if (flipped.includes(card)) return;
+    if (matched.has(card.dataset.index)) return;
+
+    card.classList.add('flipped');
+    flipped.push(card);
+
+    if (flipped.length === 2) {
+      lock = true;
+      setTimeout(() => checkMatch(cardsArray), 1100);
+    }
+  }
+
+  function checkMatch(cardsArray) {
+    const [first, second] = flipped;
+    if (!first || !second) {
+      lock = false;
+      return;
+    }
+    const firstIndex = first.dataset.index;
+    const secondIndex = second.dataset.index;
+
+    if (cardsArray[firstIndex].img === cardsArray[secondIndex].img) {
+      matched.add(firstIndex);
+      matched.add(secondIndex);
+      if (matched.size === cardsArray.length) restartBtn.hidden = false;
+    } else {
+      first.classList.remove('flipped');
+      second.classList.remove('flipped');
+    }
+    flipped = [];
+    lock = false;
+  }
+
+  restartBtn.addEventListener('click', setupGame);
+
+  window.addEventListener('load', setupGame);
+</script>
+
+</body>
+</html>
+
