@@ -1,0 +1,54 @@
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #fdf7e3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        header {
+            width: 100%;
+            background: #d63d3d;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .flag {
+            width: 40px;
+            height: 40px;
+            background: #f7d51d;
+            clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%);
+            display: inline-block;
+            margin: 0 2px;
+            animation: sway 2s infinite ease-in-out;
+        }
+        @keyframes sway {
+            0% { transform: rotate(0deg); } 
+            50% { transform: rotate(5deg); } 
+            100% { transform: rotate(0deg); } 
+        }
+        #gameContainer {
+            margin-top: 20px;
+            position: relative;
+        }
+        canvas {
+            border: 4px solid #4c9f70;
+            background: #79c2ff;
+        }
+        #scoreBoard {
+            margin-top: 10px;
+            font-size: 18px;
+        }
+        #startBtn {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 18px;
+            background: #f7d51d;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+    
