@@ -211,46 +211,40 @@
     &copy; 2025 Festa Junina - Projeto Interativo
   </div>
 </footer>
-      <script>
-        const maxFish = 10;
-        function randomPosition() {
-            const x = Math.random() * (gameContainer.clientWidth - 50);
-            const y = Math.random() * (gameContainer.clientHeight - 30);
-            return { x, y };
-        }
-        function createFish() {
-            const fish = document.createElement('img');
-            fish.src = 'https://placehold.co/50x30/png?text=🐟'; // Imagem de peixe
-            fish.classList.add('fish');
-            const pos = randomPosition();
-            fish.style.left = pos.x + 'px';
-            fish.style.top = pos.y + 'px';
-            fish.addEventListener('click', () => {
-                score++;
-                scoreEl.textContent = score;
-                gameContainer.removeChild(fish);
-            });
-            gameContainer.appendChild(fish);
-        }
+      <h1>Jogo de Pesca</h1>
+    <p>Pesque os peixinhos coloridos e marque pontos! Clique nos peixes para pescar.</p>
+    <p>Pontos: <span id="score">0</span></p>
+    <div id="gameArea"></div>
+    <button onclick="startGame()">Iniciar Jogo</button>
+    <script>
+        let score = 0;
+        const gameArea = document.getElementById('gameArea');
         function startGame() {
             score = 0;
-            scoreEl.textContent = score;
-            gameContainer.innerHTML = '';
-            startBtn.disabled = true;
-            let fishCount = 0;
-            gameInterval = setInterval(() => {
-                if (fishCount >= maxFish) {
-                    clearInterval(gameInterval);
-                    alert('O jogo acabou! Sua pontuação final foi: ' + score);
-                    startBtn.disabled = false;
-                    return;
-                }
-                createFish();
-                fishCount++;
-            }, 1000);
+            document.getElementById('score').innerText = score;
+            gameArea.innerHTML = '';
+            spawnFish();
         }
-        startBtn.addEventListener('click', startGame);
-    </script>
+        function spawnFish() {
+            const fish = document.createElement('div');
+            fish.className = 'fish';
+            fish.style.top = Math.random() * (gameArea.clientHeight - 20) + 'px';
+            fish.style.left = Math.random() * (gameArea.clientWidth - 30) + 'px';
+            fish.onclick = function() {
+                score++;
+                document.getElementById('score').innerText = score;
+                gameArea.removeChild(fish);
+                spawnFish();
+            };
+            gameArea.appendChild(fish);
+            setTimeout(() => {
+                if (gameArea.contains(fish)) {
+                    gameArea.removeChild(fish);
+                    spawnFish();
+                }
+            }, 2000); // Tempo em que o peixe desaparece
+        }
+    </script> 
 </head>
 </body>
 </html>
