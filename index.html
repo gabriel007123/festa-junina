@@ -205,17 +205,6 @@
     <button id="restart-btn-fishing" aria-label="Reiniciar jogo de pesca" hidden>Reiniciar Jogo</button>
   </div>
 </section>
-
-<footer role="contentinfo">
-  <div class="container">
-    &copy; 2025 Festa Junina - Projeto Interativo
-  </div>
-</footer>
-      <h1>Jogo de Pesca</h1>
-    <p>Pesque os peixinhos coloridos e marque pontos! Clique nos peixes para pescar.</p>
-    <p>Pontos: <span id="score">0</span></p>
-    <div id="gameArea"></div>
-    <button onclick="startGame()">Iniciar Jogo</button>
     <script>
         let score = 0;
         const gameArea = document.getElementById('gameArea');
@@ -244,7 +233,7 @@
                 }
             }, 2000); // Tempo em que o peixe desaparece
         }
-    </script> 
+    </script>
 </head>
 </body>
 </html>
