@@ -1,313 +1,206 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Festa Junina - Jogo de Pesca Interativo</title>
-<link rel="stylesheet" href="oloko .css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arraiá do Seu Zé - Festa Junina 2023</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap" rel="stylesheet" />
 </head>
 <body>
-
-<header>
-  <div class="container header-inner">
-    <div class="logo" tabindex="0" aria-label="Logo Festa Junina Yoki">Festa Junina</div>
-    <nav aria-label="Menu principal">
-      <ul>
-        <li><a href="#recipes">Receitas</a></li>
-        <li><a href="#quiz">Quiz</a></li>
-        <li><a href="#fishing-game">Jogo de Pesca</a></li>
-        <li><a href="#tradicões">Tradições</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
-
-<section class="hero" role="banner" aria-label="Banner de festa junina com fogueira e bandeirinhas">
-  <div class="hero-content container">
-    <h1>Venha Curtir a Festa Junina!</h1>
-    <p>Sabores típicos, brincadeiras e muita diversão para toda a família. Descubra receitas, tradições e nossos jogos interativos!</p>
-    <a href="#recipes"><button aria-label="Ver receitas típicas da festa junina">Ver Receitas</button></a>
-  </div>
-</section>
-
-<section id="recipes" class="container" tabindex="0" aria-label="Receitas típicas da Festa Junina">
-  <h2 class="section-title">Receitas Típicas</h2>
-  <div class="recipes-grid" role="list">
-    <article class="recipe-card" role="listitem" tabindex="0" aria-label="Receita de Pamonha">
-      <img src="lllaaa.jpg" alt="Foto de pamonha tradicional servida em folha verde" loading="lazy" />
-      <div class="recipe-card-content">
-        <h3>Pamonha</h3>
-        <p>Deliciosa pamonha feita com milho verde e especiarias, um clássico da festa junina para saborear com a família.</p>
-         <button id="VerReceita" aria-label="Ver receita da Pamonha">Ver receita</button>
-
-
-         <script>
-        // Seleciona o botão pelo seu ID
-        const botaoPamonha = document.getElementById('VerReceita');
-
-        // Adiciona um "ouvinte de evento" (event listener) para o clique no botão
-        botaoPamonha.addEventListener('click', function() {
-            // Define a URL da receita de canjica fornecida
-            const urlPamonha = 'receita2.html';
-
-            // Redireciona o navegador para a URL da receita
-            window.location.href = urlPamonha;
-
-            // Se você quiser que a página da receita abra em uma nova aba,
-            // você usaria window.open(urlReceita, '_blank');
-            // Por exemplo:
-            // window.open(urlReceita, '_blank');
-            // window.location.href = urlReceita; // Remova esta linha se usar window.open
-        });
-    </script>
-      </div>
-    </article>
-
-    <article class="recipe-card" role="listitem" tabindex="0" aria-label="Receita de Canjica">
-      <img src="canjica.jpg" alt="Foto da canjica em uma tigela decorada com canela" loading="lazy" />
-      <div class="recipe-card-content">
-        <h3>Canjica</h3>
-        <p>Saborosa canjica cremosa, com milho cozido, leite de coco e um toque de canela para aquecer as noites da festa.</p>
-          <button id="btnVerReceita" aria-label="Ver receita da canjica">Ver receita</button>
-
+    <div class="container">
+        <header>
+            <div class="bandeirinhas">
+                <div class="bandeirinha">♫</div>
+                <div class="bandeirinha">🎸</div>
+                <div class="bandeirinha">🎵</div>
+                <div class="bandeirinha">👨‍🌾</div>
+                <div class="bandeirinha">🎪</div>
+            </div>
+            <h1>Arraiá do Seu Zé</h1>
+            <p>O maior forró das redondezas!</p>
+            
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b2252598-f2ee-42c9-aa06-c4ccd8ffa8aa.png" alt="Barracas coloridas de festa junina com bandeirinhas e luzes" class="animation-swing" />
+        </header>
+        
+        <div class="destaque">
+            <p>✧ 15 de Junho de 2023 ✧ 18h às 23h ✧ Praça Central ✧</p>
+        </div>
+        
+        <section>
+            <h2>🔔 Confira nossa Programação</h2>
+            <div class="info-card">
+                <h3>Horários da Festa</h3>
+                <ul>
+                    <li><strong>18:00</strong> - Abertura das barracas</li>
+                    <li><strong>19:00</strong> - Apresentação de danças típicas</li>
+                    <li><strong>20:30</strong> - Concurso de quadrilha</li>
+                    <li><strong>21:30</strong> - Show com Trio Pé de Serra</li>
+                    <li><strong>22:30</strong> - Sorteio de brindes</li>
+                </ul>
+            </div>
+            
+            <div class="info-card">
+                <h3>Localização</h3>
+                <p>Praça Central José Bonifácio, 123<br>
+                Centro - Cidade Feliz/SP</p>
+                <button id="meuLocalBtn" class="localizacao-btn">Mostrar minha localização</button>
+                <div id="mapa" style="display:none;">
+                    <div id="mapContainer"></div>
+                    <p id="distanciaTexto"></p>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2>🎪 Brincadeiras e Diversão</h2>
+            <div class="info-card">
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px;">
+                    <div>
+                        <h3>Pescaria</h3>
+                        <p>Premio: Peixe de pelúcia</p>
+                    </div>
+                    <div>
+                        <h3>Corrida do Saco</h3>
+                        <p>Premio: Medalha de ouro</p>
+                    </div>
+                    <div>
+                        <h3>Tiro ao Alvo</h3>
+                        <p>Premio: Pelúcia de cachorro</p>
+                    </div>
+                    <div>
+                        <h3>Boca do Palhaço</h3>
+                        <p>Premio: Prêmio surpresa</p>
+                    </div>
+                </div>
+                <p>Todas as brincadeiras custam R$ 5,00</p>
+            </div>
+        </section>
+        
+        <section>
+            <h2>🥘 Cardápio Junino</h2>
+            <div class="cardapio">
+                <div class="item-cardapio">
+                    <h3>Comidas Típicas</h3>
+                    <ul>
+                        <li>Pamonha <span class="preco">R$ 8,00</span></li>
+                        <li>Canjica <span class="preco">R$ 6,00</span></li>
+                        <li>Milho cozido <span class="preco">R$ 5,00</span></li>
+                        <li>Cuscuz <span class="preco">R$ 7,00</span></li>
+                        <li>Arroz doce <span class="preco">R$ 6,00</span></li>
+                    </ul>
+                </div>
+                
+                <div class="item-cardapio">
+                    <h3>Bebidas</h3>
+                    <ul>
+                        <li>Quentão <span class="preco">R$ 10,00</span></li>
+                        <li>Cerveja artesanal <span class="preco">R$ 12,00</span></li>
+                        <li>Suco natural <span class="preco">R$ 5,00</span></li>
+                        <li>Refrigerante <span class="preco">R$ 6,00</span></li>
+                    </ul>
+                </div>
+                
+                <div class="item-cardapio">
+                    <h3>Doces</h3>
+                    <ul>
+                        <li>Pé de moleque <span class="preco">R$ 4,00</span></li>
+                        <li>Cocada <span class="preco">R$ 3,00</span></li>
+                        <li>Bolo de fubá <span class="preco">R$ 7,00</span></li>
+                        <li>Paçoca <span class="preco">R$ 2,00</span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2>💃 A Grande Quadrilha</h2>
+            <div class="quadrilha-info">
+                <div class="quadrilha-imagem">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/bfdcef9d-d7cb-4f94-b730-a9a34b03c6b7.png" alt="Grupo de pessoas vestidas a caráter para quadrilha junina, homens de chapéu e mulheres de vestido florido dançando" />
+                </div>
+                <div class="quadrilha-detalhes">
+                    <h3>Quadrilha Fazenda Feliz</h3>
+                    <p>Venha assistir ao espetáculo da famosa quadrilha Fazenda Feliz, com coreografias emocionantes, figurinos incríveis e muita animação!</p>
+                    <p><strong>Horário:</strong> 20:30</p>
+                    <p><strong>Entrada:</strong> Gratuita</p>
+                    <p><strong>Duração:</strong> Aproximadamente 40 minutos</p>
+                </div>
+            </div>
+        </section>
+        
+        <div class="destaque">
+            <h3>Ingressos</h3>
+            <p>Entrada gratuita para crianças até 10 anos</p>
+            <p>Adultos: R$ 15,00 (inclui um vale-brincadeira no valor de R$ 5,00)</p>
+        </div>
+        
+        <footer>
+            <p>Não perca essa festa tradicional! Traga toda a família e venha se divertir conosco!</p>
+            <p>Mais informações: (11) 98765-4321 | arraiadoseuze@gmail.com</p>
+            <p class="bandeirinhas">
+                <span class="bandeirinha">🎉</span>
+                <span class="bandeirinha">🎊</span>
+                <span class="bandeirinha">✨</span>
+            </p>
+        </footer>
+    </div>
+    
     <script>
-        // Seleciona o botão pelo seu ID
-        const botaoReceita = document.getElementById('btnVerReceita');
-
-        // Adiciona um "ouvinte de evento" (event listener) para o clique no botão
-        botaoReceita.addEventListener('click', function() {
-            // Define a URL da receita de canjica fornecida
-            const urlReceita = 'receita1.html';
-
-            // Redireciona o navegador para a URL da receita
-            window.location.href = urlReceita;
-
-            // Se você quiser que a página da receita abra em uma nova aba,
-            // você usaria window.open(urlReceita, '_blank');
-            // Por exemplo:
-            // window.open(urlReceita, '_blank');
-            // window.location.href = urlReceita; // Remova esta linha se usar window.open
+        let map;
+        
+        // Mostrar localização e mapa
+        document.getElementById('meuLocalBtn').addEventListener('click', function() {
+            const mapa = document.getElementById('mapa');
+            
+            if(mapa.style.display === 'none') {
+                mapa.style.display = 'block';
+                
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(showPosition);
+                } else {
+                    document.getElementById('mapContainer').innerHTML = "Geolocalização não é suportada pelo seu navegador.";
+                }
+            } else {
+                mapa.style.display = 'none';
+            }
+        });
+        
+        function showPosition(position) {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+            
+            // Coordenadas da festa (exemplo)
+            const festaLat = -23.5505;
+            const festaLon = -46.6333;
+            
+            // Calcular distância
+            const distancia = calcularDistancia(lat, lon, festaLat, festaLon);
+            document.getElementById('distanciaTexto').innerHTML = `Você está a aproximadamente ${distancia.toFixed(1)}km da festa!`;
+        }
+        
+        function calcularDistancia(lat1, lon1, lat2, lon2) {
+            const R = 6371; // Raio da Terra em km
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLon = (lon2 - lon1) * Math.PI / 180;
+            const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                      Math.sin(dLon/2) * Math.sin(dLon/2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            return R * c;
+        }
+        
+        // Efeito nas bandeirinhas
+        const bandeirinhas = document.querySelectorAll('.bandeirinha');
+        bandeirinhas.forEach((bandeirinha, index) => {
+            bandeirinha.style.animationDelay = `${index * 0.2}s`;
+            bandeirinha.addEventListener('mouseover', function() {
+                this.style.transform = 'scale(1.2)';
+            });
+            bandeirinha.addEventListener('mouseout', function() {
+                this.style.transform = 'scale(1)';
+            });
         });
     </script>
-      </div>
-    </article>
-
-    <article class="recipe-card" role="listitem" tabindex="0" aria-label="Receita de Pé de Moleque">
-      <img src="olojo.jpg" alt="Foto de pé de moleque, doce feito com amendoim e rapadura" loading="lazy" />
-      <div class="recipe-card-content">
-        <h3>Pé de Moleque</h3>
-        <p>Doce tradicional de amendoim e rapadura, crocante e perfeito para aproveitar a festa com muito sabor.</p>
-         <button id="mlkReceita" aria-label="Ver receita da Pé de Moleque">Ver receita</button>
-
-        <script>
-
-        // Seleciona o botão pelo seu ID
-        const botaoPmlk = document.getElementById('mlkReceita');
-
-        // Adiciona um "ouvinte de evento" (event listener) para o clique no botão
-        botaoPmlk.addEventListener('click', function() {
-            // Define a URL da receita de canjica fornecida
-            const urlPemlk = 'receita3.html';
-
-            // Redireciona o navegador para a URL da receita
-            window.location.href = urlPemlk;
-
-            // Se você quiser que a página da receita abra em uma nova aba,
-            // você usaria window.open(urlReceita, '_blank');
-            // Por exemplo:
-            // window.open(urlReceita, '_blank');
-            // window.location.href = urlReceita; // Remova esta linha se usar window.open
-        });
-        </script>
-      </div>
-    </article>
-  </div>
-</section>
-
-<section id="tradicões" class="container" tabindex="0" aria-label="Tradições típicas da Festa Junina">
-  <h2 class="section-title">Tradições Típicas</h2>
-  <ul style="max-width: 800px; margin: 0 auto; font-size: 1.1rem; line-height: 1.7; color: #5a1a01; font-weight: 500; padding-left: 1.2rem;">
-    <li>Quadrilha – dança típica que representa uma festa de casamento caipira de forma divertida e animada.</li>
-    <li>Fogueira – ponto central da festa, símbolo de luz e proteção segundo tradições antigas.</li>
-    <li>Bandeirinhas coloridas – decoram o ambiente e criam um clima festivo contagiante.</li>
-    <li>Balões de papel – tradicionalmente usados em comemorações, apesar de proibidos em vários lugares devido ao risco de incêndios.</li>
-    <li>Comidas típicas – alimentos feitos com milho, amendoim e rapadura que representam a fartura da colheita.</li>
-  </ul>
-</section>
-
-<section id="quiz" class="container" tabindex="0" aria-label="Quiz interativo sobre a Festa Junina">
-  <h2 class="section-title">Quiz: Você conhece a Festa Junina?</h2>
-  <form id="quizForm" aria-live="polite" aria-atomic="true" aria-relevant="additions removals">
-    <div class="quiz-question" id="q1">
-      1. Qual dessas comidas NÃO é típica da Festa Junina?
-    </div>
-    <ul class="quiz-options" role="radiogroup" aria-labelledby="q1">
-      <li>
-        <label>
-          <input type="radio" name="q1" value="a" />
-          Pamonha
-        </label>
-      </li>
-      <li>
-        <label>
-          <input type="radio" name="q1" value="b" />
-          Churrasco
-        </label>
-      </li>
-      <li>
-        <label>
-          <input type="radio" name="q1" value="c" />
-          Pé de moleque
-        </label>
-      </li>
-    </ul>
-
-    <div class="quiz-question" id="q2">
-      2. Qual dança é tradicional na Festa Junina?
-    </div>
-    <ul class="quiz-options" role="radiogroup" aria-labelledby="q2">
-      <li>
-        <label>
-          <input type="radio" name="q2" value="a" />
-          Samba
-        </label>
-      </li>
-      <li>
-        <label>
-          <input type="radio" name="q2" value="b" />
-          Quadrilha
-        </label>
-      </li>
-      <li>
-        <label>
-          <input type="radio" name="q2" value="c" />
-          Forró
-        </label>
-      </li>
-    </ul>
-
-    <button type="submit" aria-label="Enviar respostas">Enviar Respostas</button>
-    <div id="quiz-result" role="region" aria-live="polite" tabindex="0"></div>
-  </form>
-</section>
-
-<section id="fishing-game" class="container" tabindex="0" aria-label="Jogo de pesca da Festa Junina">
-  <h2 class="section-title">Jogo de Pesca</h2>
-  <p>Pesque os peixinhos coloridos e marque pontos! Clique nos peixes para pescar.</p>
-  <div id="scoreboard" role="status" aria-live="polite" aria-atomic="true" style="font-weight:700; font-size:1.3rem; color:#256d24; margin-bottom:16px;">
-    Pontos: 0
-  </div>
-  <div id="fishpond" aria-label="Tanque de peixes da festa junina" style="position:relative; width:100%; max-width:860px; height:320px; background: linear-gradient(to top, #107a1e, #5abe00 70%); border-radius:16px; overflow:hidden; box-shadow: inset 0 0 30px rgba(15,102,22,0.6); margin:auto;"></div>
-  <div style="margin-top:12px; text-align:center;">
-    <button id="start-btn" aria-label="Iniciar jogo de pesca">Iniciar Jogo</button>
-    <button id="restart-btn-fishing" aria-label="Reiniciar jogo de pesca" hidden>Reiniciar Jogo</button>
-  </div>
-</section>
-
-<footer role="contentinfo">
-  <div class="container">
-    &copy; 2025 Festa Junina - Projeto Interativo
-  </div>
-</footer>
-
-<script>
-    const fishImages = [
-        "https://emojipedia.org/pt/peixe-tropical/80x50/png?text=Peixe+1",
-        "https://placehold.co/80x50/png?text=Peixe+2",
-        "https://placehold.co/80x50/png?text=Peixe+3",
-        "https://placehold.co/80x50/png?text=Peixe+4",
-        "https://placehold.co/80x50/png?text=Peixe+5",
-    ];
-    const fishpond = document.getElementById('fishpond');
-    const scoreboard = document.getElementById('scoreboard');
-    const startBtn = document.getElementById('start-btn');
-    const restartBtnFishing = document.getElementById('restart-btn-fishing');
-
-    let gameInterval = null;
-    let score = 0;
-    let fishingActive = false;
-    const maxFish = 10;
-
-    function randomPosition() {
-        const pondWidth = fishpond.clientWidth;
-        const pondHeight = fishpond.clientHeight;
-        const x = Math.random() * (pondWidth - 80);
-        const y = Math.random() * (pondHeight - 50);
-        return { x, y };
-    }
-
-    function createFish(id) {
-        const fish = document.createElement('img');
-        fish.src = fishImages[Math.floor(Math.random() * fishImages.length)];
-        fish.alt = "Peixinho da festa junina";
-        fish.classList.add('fish');
-        fish.style.position = 'absolute';
-        const pos = randomPosition();
-        fish.style.left = pos.x + 'px';
-        fish.style.top = pos.y + 'px';
-        fish.dataset.id = id;
-
-        fish.addEventListener('click', () => {
-            if (!fishingActive) return;
-            fishpond.removeChild(fish);
-            score++;
-            updateScore();
-        });
-
-        return fish;
-    }
-
-    function updateScore() {
-        scoreboard.textContent = `Pontos: ${score}`;
-    }
-
-    function startFishingGame() {
-        if (fishingActive) return;
-        score = 0;
-        updateScore();
-        fishpond.innerHTML = '';
-        fishingActive = true;
-        startBtn.hidden = true;
-        restartBtnFishing.hidden = true;
-
-        let fishCount = 0;
-
-        gameInterval = setInterval(() => {
-            if (fishCount >= maxFish) {
-                clearInterval(gameInterval);
-                fishingActive = false;
-                startBtn.hidden = true;
-                restartBtnFishing.hidden = false;
-                alert('O jogo acabou! Sua pontuação final foi: ' + score);
-                return;
-            }
-            const fish = createFish(fishCount);
-            fishpond.appendChild(fish);
-            fishCount++;
-
-            setTimeout(() => {
-                if (fishpond.contains(fish)) {
-                    fishpond.removeChild(fish);
-                }
-            }, 6000);
-        }, 900);
-    }
-
-    function restartFishingGame() {
-        clearInterval(gameInterval);
-        fishpond.innerHTML = '';
-        score = 0;
-        updateScore();
-        startBtn.hidden = false;
-        restartBtnFishing.hidden = true;
-        fishingActive = false;
-    }
-
-    startBtn.addEventListener('click', startFishingGame);
-    restartBtnFishing.addEventListener('click', restartFishingGame);
-</script>
-
 </body>
 </html>
+
