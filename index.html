@@ -108,6 +108,7 @@
                         <li>Paçoca <span class="preco">R$ 2,00</span></li>
                     </ul>
                 </div>
+           <button id="btnProximaPagina" class="botao">Próxima Página</button>
             </div>
         </section>
         
@@ -199,6 +200,11 @@
                 this.style.transform = 'scale(1)';
             });
         });
+    document.getElementById('btnProximaPagina').addEventListener('click', function() {
+        // Altere para o URL da página que deseja redirecionar
+        window.location.href = 'proxima_pagina.html';
+    });
+
     </script>
 </body>
 </html>
