@@ -138,7 +138,7 @@
         .localizacao-btn:hover {
             background-color: var(--cor-primaria);
         }
-        .botao {
+        .botao-bnt {
             background-color: var(--cor-destaque);
             color: white;
             border: none;
@@ -148,7 +148,7 @@
             margin: 10px 0;
             font-weight: bold;
         }
-        .botao:hover {
+        .botao-bnt:hover {
                background-color: var(--cor-primaria);
         }
         #mapContainer {
