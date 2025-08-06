@@ -89,3 +89,10 @@ body {
         .botao-bnt:hover {
                background-color: var(--cor-primaria);
         }
+         :root {
+            --cor-primaria: #e74c3c;
+            --cor-secundaria: #f39c12;
+            --cor-texto: #2c3e50;
+            --cor-fundo: #fffdf5;
+            --cor-destaque: #27ae60;
+        }
