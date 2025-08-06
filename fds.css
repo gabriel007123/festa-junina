@@ -76,3 +76,16 @@ body {
         padding: 1.2rem 1.6rem;
       }
     }
+    .botao-bnt {
+            background-color: var(--cor-destaque);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        .botao-bnt:hover {
+               background-color: var(--cor-primaria);
+        }
