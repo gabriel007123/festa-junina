@@ -1,0 +1,78 @@
+body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #fffde7, #f9f7f1);
+      color: #3d3d3d;
+      margin: 0;
+      padding-bottom: 3rem;
+    }
+    h1, h2 {
+      font-weight: 700;
+    }
+    h1 {
+      font-size: 2.5rem;
+      color: #d54e3e;
+      margin-top: 1.5rem;
+      text-align: center;
+      text-shadow: 1px 1px 2px #b23a28;
+    }
+    h2 {
+      font-size: 1.8rem;
+      color: #d54e3e;
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+      border-bottom: 3px solid #ee7752;
+      display: inline-block;
+      padding-bottom: 0.2rem;
+    }
+    ul {
+      list-style-type: disc;
+      padding-left: 1.5rem;
+      max-width: 520px;
+      margin-bottom: 2rem;
+    }
+    .price {
+      font-weight: 600;
+      color: #258f48;
+    }
+    .content-section {
+      max-width: 900px;
+      margin: 1rem auto 2rem auto;
+      background-color: #fff8e1;
+      border-radius: 10px;
+      padding: 1.8rem 2.4rem;
+      box-shadow: 0 0 12px rgba(245, 174, 66, 0.4);
+    }
+    .food-name {
+      font-weight: 600;
+      color: #2c7a2c;
+    }
+    .image-container {
+      max-width: 700px;
+      margin: 1.5rem auto;
+      text-align: center;
+    }
+    img {
+      width: 100%;
+      max-height: 380px;
+      border-radius: 12px;
+      object-fit: cover;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    }
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      color: #666;
+    }
+    @media (max-width: 640px) {
+      h1 {
+        font-size: 2rem;
+      }
+      h2 {
+        font-size: 1.4rem;
+      }
+      .content-section {
+        margin: 1rem 1rem 2rem 1rem;
+        padding: 1.2rem 1.6rem;
+      }
+    }
