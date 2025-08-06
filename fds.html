@@ -1,26 +1,188 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Comidas e Bebidas Típicas Brasileiras</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #fffde7, #f9f7f1);
+      color: #3d3d3d;
+      margin: 0;
+      padding-bottom: 3rem;
+    }
+    h1, h2 {
+      font-weight: 700;
+    }
+    h1 {
+      font-size: 2.5rem;
+      color: #d54e3e;
+      margin-top: 1.5rem;
+      text-align: center;
+      text-shadow: 1px 1px 2px #b23a28;
+    }
+    h2 {
+      font-size: 1.8rem;
+      color: #d54e3e;
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+      border-bottom: 3px solid #ee7752;
+      display: inline-block;
+      padding-bottom: 0.2rem;
+    }
+    ul {
+      list-style-type: disc;
+      padding-left: 1.5rem;
+      max-width: 520px;
+      margin-bottom: 2rem;
+    }
+    .price {
+      font-weight: 600;
+      color: #258f48;
+    }
+    .content-section {
+      max-width: 900px;
+      margin: 1rem auto 2rem auto;
+      background-color: #fff8e1;
+      border-radius: 10px;
+      padding: 1.8rem 2.4rem;
+      box-shadow: 0 0 12px rgba(245, 174, 66, 0.4);
+    }
+    .food-name {
+      font-weight: 600;
+      color: #2c7a2c;
+    }
+    .image-container {
+      max-width: 700px;
+      margin: 1.5rem auto;
+      text-align: center;
+    }
+    img {
+      width: 100%;
+      max-height: 380px;
+      border-radius: 12px;
+      object-fit: cover;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    }
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      color: #666;
+    }
+    @media (max-width: 640px) {
+      h1 {
+        font-size: 2rem;
+      }
+      h2 {
+        font-size: 1.4rem;
+      }
+      .content-section {
+        margin: 1rem 1rem 2rem 1rem;
+        padding: 1.2rem 1.6rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <main class="galeria">
-  <section class="curiosidade">
-    <h2>Você sabia?</h2>
-    <p>O polvo tem três corações e seu sangue é azul</p>
+
+  <header>
+    <h1>Comidas e Bebidas Típicas Brasileiras</h1>
+  </header>
+
+  <section class="content-section">
+    <h2>Comidas Típicas</h2>
+    <ul>
+      <li><span class="food-name">Pamonha</span> <span class="price">R$ 8,00</span></li>
+      <li><span class="food-name">Canjica</span> <span class="price">R$ 6,00</span></li>
+      <li><span class="food-name">Milho cozido</span> <span class="price">R$ 5,00</span></li>
+      <li><span class="food-name">Cuscuz</span> <span class="price">R$ 7,00</span></li>
+      <li><span class="food-name">Arroz doce</span> <span class="price">R$ 6,00</span></li>
+    </ul>
+
+    <article>
+      <h3 class="text-xl font-semibold mb-2 text-orange-700">Pamonha</h3>
+      <p>A pamonha é um prato tradicional brasileiro feito de milho verde ralado, açúcar ou sal, e cozido dentro da própria palha do milho. Tem origem indígena, sendo consumida no Brasil desde a época colonial. Popular nas festas juninas, é celebrada como uma receita de raízes indígenas e rurais, representando a ligação da cozinha brasileira com o milho, base da alimentação nativa.</p>
+
+      <div class="image-container">
+        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/af1e6866-81f3-4730-bebb-b433dca0ef33.png" alt="Pamonha tradicional brasileira embrulhada na palha, em um prato rústico com ambientação campestre e cores quentes" onerror="this.style.display='none'" />
+      </div>
+
+      <h3 class="text-xl font-semibold mb-2 text-orange-700">Canjica</h3>
+      <p>Canjica, também chamada de mungunzá em algumas regiões, é um doce feito com grãos de milho branco cozidos com leite, açúcar, canela e coco. É igualmente típica das festas juninas e tem influência dos indígenas brasileiros e também da culinária africana colonial, que agregou o uso do leite de coco e especiarias. É símbolo de celebração e conforto nos meses de junho e julho.</p>
+
+      <div class="image-container">
+        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f49d2fc6-3bf5-4320-9967-9d16cff9eaed.png" alt="Tigela com canjica cremosa, decorada com cravos-da-índia e canela, na mesa de madeira com pano colorido tradicional" onerror="this.style.display='none'" />
+      </div>
+
+      <h3 class="text-xl font-semibold mb-2 text-orange-700">Milho cozido</h3>
+      <p>O milho cozido é uma forma simples e antiga de se consumir o milho, basicamente o grão cozido com água e sal. É uma comida de origem indígena, presente no Brasil desde antes da colonização, e muito comum em feiras e festas populares. Simboliza a base da alimentação e é consumido em diversas regiões do país, sendo um alimento acessível e reconfortante.</p>
+
+      <div class="image-container">
+        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/127d07e3-3954-4964-97a6-840b54d47e78.png" alt="Espiga de milho amarelo cozida, coloquialmente servida com manteiga derretida e sal, em prato rústico" onerror="this.style.display='none'" />
+      </div>
+
+      <h3 class="text-xl font-semibold mb-2 text-orange-700">Cuscuz</h3>
+      <p>O cuscuz brasileiro é diferente do de origem africana e do norte da África. Ele é feito com farinha de milho, cozida no vapor, popular no Nordeste do Brasil. O prato tem raízes indígenas com adaptações trazidas pelos africanos e portugueses, se tornando um símbolo da culinária nordestina, apreciado no café da manhã ou como acompanhamento de refeições.</p>
+
+      <div class="image-container">
+        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/5ee69004-a1fb-4a94-9dcd-5602e1a671fc.png" alt="Porção de cuscuz brasileiro amarelo servido em pratinho branco com manteiga e acompanhamentos típicos" onerror="this.style.display='none'" />
+      </div>
+
+      <h3 class="text-xl font-semibold mb-2 text-orange-700">Arroz doce</h3>
+      <p>Arroz doce é uma sobremesa histórica trazida pelos portugueses e adaptada ao Brasil. Feito com arroz, leite, açúcar e canela, é tradicional em festas e celebrações populares no país. O prato simboliza a colonização e a mistura de culturas, sendo preparado de formas regionais e apreciado no inverno e ocasiões familiares.</p>
+
+      <div class="image-container">
+        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/6891cc5a-6051-4073-b3d5-a7196594d912.png" alt="Tigela branca contendo arroz doce com canela polvilhada por cima, em uma mesa de madeira clara" onerror="this.style.display='none'" />
+      </div>
+    </article>
   </section>
 
-  <section class="curiosidade">
-    <h2>Curiosidade Histórica</h2>
-    <p>Cleópatra viveu mais próxima do primeiro pouso na Lua do que da construção das pirâmides!</p>
+  <section class="content-section">
+    <h2>Bebidas</h2>
+    <ul>
+      <li><span class="food-name">Quentão</span> <span class="price">R$ 10,00</span></li>
+      <li><span class="food-name">Cerveja artesanal</span> <span class="price">R$ 12,00</span></li>
+      <li><span class="food-name">Suco natural</span> <span class="price">R$ 5,00</span></li>
+      <li><span class="food-name">Refrigerante</span> <span class="price">R$ 6,00</span></li>
+    </ul>
+
+    <article>
+      <h3 class="text-xl font-semibold mb-2 text-orange-700">Quentão</h3>
+      <p>Quentão é uma bebida tradicional típica das festas juninas brasileiras, feita com cachaça, gengibre, especiarias (canela, cravo) e açúcar, servida quente para aquecer nas noites frias. Tem origem portuguesa e adaptações brasileiras, ligando-se ao calendário rural e às celebrações do ciclo do milho, sendo uma bebida com forte componente social e cultural.</p>
+
+      <div class="image-container">
+        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/65d88814-bdb1-4bba-90dd-dc4375bb9270.png" alt="Caneca tradicional de quentão fumegante, com especiarias visíveis, em fundo escuro com iluminação aconchegante" onerror="this.style.display='none'" />
+      </div>
+
+      <h3 class="text-xl font-semibold mb-2 text-orange-700">Cerveja artesanal</h3>
+      <p>A cerveja artesanal tem ganhado destaque no Brasil como uma bebida de produção independente, valorizando ingredientes naturais e processos tradicionais ou inovadores. Diferente das cervejas comuns, ela simboliza o movimento de valorização da cultura local e regional, com estilos que variam conforme a região do país.</p>
+
+      <div class="image-container">
+        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/942aaf53-d621-4630-ae84-04bc13bf7006.png" alt="Garrafa de cerveja artesanal com dois copos ao lado, em uma composição elegante com madeira escura e elementos naturais" onerror="this.style.display='none'" />
+      </div>
+
+      <h3 class="text-xl font-semibold mb-2 text-orange-700">Suco natural</h3>
+      <p>O suco natural é muito consumido em todo Brasil, feito com frutas frescas da região, sem adição de conservantes ou açúcares industrializados. Representa o frescor tropical, a riqueza das frutas nacionais e o cuidado com a saúde, muito presente em lanchonetes e bares populares.</p>
+
+      <div class="image-container">
+        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/56a994cd-c08d-46d8-b47b-879feca130ff.png" alt="Três copos de sucos naturais coloridos (laranja, verde, vermelho) com canudos, em bancada clara e ambiente descontraído" onerror="this.style.display='none'" />
+      </div>
+
+      <h3 class="text-xl font-semibold mb-2 text-orange-700">Refrigerante</h3>
+      <p>O refrigerante é uma bebida gaseificada popular, introduzida no Brasil no século 20 e amplamente difundida por sua praticidade e sabor doce. Embora não seja tradicionalmente típica, sua presença em festas e encontros é marcante, constando como um dos principais acompanhamentos, especialmente para crianças e jovens.</p>
+
+      <div class="image-container">
+        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/821c0ef8-f53f-453d-9dbf-268479947ded.png" alt="Garrafa clássica de refrigerante com copos cheios de gelo ao redor, em uma mesa social alegre e informal" onerror="this.style.display='none'" />
+      </div>
+    </article>
   </section>
 
-<section class="curiosidade">
-    <h2>Curiosidade Científica</h2>
-    <p>O DNA humano é 60% semelhante ao de uma banana!</p>
-</section>
-    </main>
+  <footer>
+    © 2024 Comidas e Bebidas Típicas Brasileiras - Conteúdo cultural e histórico
+  </footer>
+
 </body>
 </html>
