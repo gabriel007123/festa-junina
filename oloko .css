@@ -169,28 +169,7 @@
             border-top: 3px dashed var(--cor-primaria);
             font-size: 1.1rem;
         }
-        
-        @media (max-width: 768px) {
-            .quadrilha-info {
-                flex-direction: column;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
-            h2 {
-                font-size: 1.5rem;
-            }
-        }
-        
-        /* Animations */
-        @keyframes swing {
-            0%, 100% { transform: rotate(-3deg); }
-            50% { transform: rotate(3deg); }
-        }
-        
-        .animation-swing {
+             .animation-swing {
             animation: swing 3s ease-in-out infinite;
         }
                 .localizacao-btn {
@@ -216,6 +195,28 @@
             margin-top: 10px;
             font-weight: bold;
         }
+        
+        @media (max-width: 768px) {
+            .quadrilha-info {
+                flex-direction: column;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+        
+        /* Animations */
+        @keyframes swing {
+            0%, 100% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+        }
+        
+   
         .folclore {
   text-align: center;
   padding: 40px;
