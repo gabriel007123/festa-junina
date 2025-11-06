@@ -162,40 +162,7 @@
             flex: 2;
         }
         
-        footer {
-            text-align: center;
-            padding: 20px;
-            margin-top: 30px;
-            border-top: 3px dashed var(--cor-primaria);
-            font-size: 1.1rem;
-        }
-             .animation-swing {
-            animation: swing 3s ease-in-out infinite;
-        }
-                .localizacao-btn {
-            background-color: #007bff; /* Azul */
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 5px;
-            margin-top: 10px;
-        }
-        .localizacao-btn:hover {
-            background-color: #0056b3;
-        }
-        #mapContainer {
-            height: 400px; /* Altura do mapa */
-            width: 100%;
-            border-radius: 5px;
-            margin-top: 10px;
-        }
-        #distanciaTexto {
-            margin-top: 10px;
-            font-weight: bold;
-        }
-        
+
         @media (max-width: 768px) {
             .quadrilha-info {
                 flex-direction: column;
