@@ -4,22 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lendas Do Nordeste</title>
-    <link rel="stylesheet" href="oloko .css">
+    <link rel="stylesheet" href="oloko .css">  <!-- Certifique-se de que este arquivo existe e está correto (note o espaço no nome, pode ser erro) -->
     <!-- Incluindo Leaflet CSS e JS via CDN para o mapa -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <script src="script.js"></script>
-<style>
-            footer {
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>  <!-- Adicionado: script JS do Leaflet -->
+    <style>
+        footer {
             text-align: center;
             padding: 20px;
             margin-top: 30px;
             border-top: 3px dashed var(--cor-primaria);
             font-size: 1.1rem;
         }
-             .animation-swing {
+        .animation-swing {
             animation: swing 3s ease-in-out infinite;
         }
-                .localizacao-btn {
+        .localizacao-btn {
             background-color: #007bff; /* Azul */
             color: white;
             border: none;
@@ -42,22 +42,20 @@
             margin-top: 10px;
             font-weight: bold;
         }
-        
-</style>
+    </style>
 </head>
 <body>
     <div class="container">
         <header>
             <div class="bandeirinhas">
-            <div class="bandeirinha">✨</div>
-            <div class="bandeirinha">🌙</div>
-            <div class="bandeirinha">🧙‍♂️</div>
-            <div class="bandeirinha">🧚‍♀️</div>
-            <div class="bandeirinha">🌾</div>
+                <div class="bandeirinha">✨</div>
+                <div class="bandeirinha">🌙</div>
+                <div class="bandeirinha">🧙‍♂️</div>
+                <div class="bandeirinha">🧚‍♀️</div>
+                <div class="bandeirinha">🌾</div>
             </div>
             <h1>Ecos do Sertão: Lendas do Nordeste</h1>
             <p>Onde o mistério encontra a tradição!</p>
-            
             <img src="festa7.jpg" alt="Barracas coloridas de festa junina com bandeirinhas e luzes" class="animation-swing" />
         </header>
         
@@ -79,9 +77,8 @@
             
             <div class="info-card">
                 <h3>Origem das Lendas</h3>
-                <p>Essas histórias nasceram nas florestas, rios e vilas do Brasil, passadas de geração em geração pelo nosso povo. <br>
-                </p>
-                <button id="maps.html" class="localizacao-btn">Explore As Lendas</button>
+                <p>Essas histórias nasceram nas florestas, rios e vilas do Brasil, passadas de geração em geração pelo nosso povo. <br></p>
+                <button id="exploreBtn" class="localizacao-btn">Explore As Lendas</button>  <!-- ID mudado para algo simples -->
                 <div id="mapa" style="display:none;">
                     <div id="mapContainer"></div>
                     <p id="distanciaTexto"></p>
@@ -127,9 +124,7 @@
                         <li>Cuca <span class="preco"></span></li>
                     </ul>
                 </div>
-             
-                </div>
-       
+                
                 <div class="item-cardapio">
                     <h3>Onde Ficam Localizadas As Lendas</h3>
                     <ul>
@@ -139,29 +134,26 @@
                         <li>Sudeste <span class="preco"></span></li>
                     </ul>
                 </div>
-             <button id="btMProximaPagina" class="botao-bnt">Próxima Página</button>
-                </div>
-    
+                <button id="btMProximaPagina" class="botao-bnt">Próxima Página</button>
+            </div>
         </section>
         
-<section class="folclore">
-  <h2>🎭 O Que é o Folclore Brasileiro?</h2>
-  <p>
-    O folclore é o conjunto de lendas, histórias, costumes, músicas e tradições que fazem parte da cultura de um povo.
-    No Brasil, ele representa a sabedoria popular passada de geração em geração, mostrando a riqueza e a diversidade do nosso país.
-  </p>
-
-  <!-- Aqui vem o vídeo -->
-  <div class="video-container">
-    <iframe width="560" height="315"
-      src="https://www.youtube.com/embed/QM7zvZfFQyI"
-      title="O que é o Folclore Brasileiro"
-      frameborder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen>
-    </iframe>
-  </div>
-</section>>
+        <section class="folclore">
+            <h2>🎭 O Que é o Folclore Brasileiro?</h2>
+            <p>
+                O folclore é o conjunto de lendas, histórias, costumes, músicas e tradições que fazem parte da cultura de um povo.
+                No Brasil, ele representa a sabedoria popular passada de geração em geração, mostrando a riqueza e a diversidade do nosso país.
+            </p>
+            <div class="video-container">
+                <iframe width="560" height="315"
+                    src="https://www.youtube.com/embed/QM7zvZfFQyI"
+                    title="O que é o Folclore Brasileiro"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </section>
         
         <div class="destaque">
             <h3>Regras</h3>
@@ -172,7 +164,7 @@
         </div>
         
         <footer>
-            <p>Não perca essa festa tradicional!  venha se divertir conosco!</p>
+            <p>Não perca essa festa tradicional! Venha se divertir conosco!</p>
             <p>Mais informações: (11) 98765-4321 | escola11deoutubro@gmail.com</p>
             <p class="bandeirinhas">
                 <span class="bandeirinha">🎉</span>
@@ -183,17 +175,23 @@
     </div>
     
     <script>
-    let map; // Variável para o mapa
+        let map; // Variável para o mapa
         let markers = []; // Array para armazenar marcadores
         let selectedMarkers = []; // Para calcular distância entre dois marcadores
 
         // Mostrar/ocultar mapa e inicializá-lo (integrado ao botão "Explore As Lendas")
-        document.getElementById('maps.html').addEventListener('click', function() {
+        document.getElementById('exploreBtn').addEventListener('click', function() {  // ID atualizado
+            console.log('Botão "Explore As Lendas" clicado!');  // Log para depuração
             const mapaDiv = document.getElementById('mapa');
             if (mapaDiv.style.display === 'none' || mapaDiv.style.display === '') {
                 mapaDiv.style.display = 'block';
                 if (!map) { // Inicializa o mapa apenas uma vez
-                    initMap();
+                    try {
+                        initMap();
+                        console.log('Mapa inicializado com sucesso.');
+                    } catch (error) {
+                        console.error('Erro ao inicializar mapa:', error);
+                    }
                 }
             } else {
                 mapaDiv.style.display = 'none';
