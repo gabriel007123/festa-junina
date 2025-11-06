@@ -43,16 +43,15 @@
                 </ul>
             </div>
             
-              <div class="info-card">
-        <h3>Origem das Lendas</h3>
-        <p>Essas histórias nasceram nas florestas, rios e vilas do Brasil, passadas de geração em geração pelo nosso povo. <br>
-        </p>
-        <button id="maps.html" class="localizacao-btn">Explore As Lendas</button>
-        <div id="mapa" style="display:none;">
-            <div id="mapContainer"></div>
-            <p id="distanciaTexto">Clique em dois marcadores para calcular a distância entre eles!</p>
-        </div>
-    </div>
+            <div class="info-card">
+                <h3>Origem das Lendas</h3>
+                <p>Essas histórias nasceram nas florestas, rios e vilas do Brasil, passadas de geração em geração pelo nosso povo. <br>
+                </p>
+                <button id="maps.html" class="localizacao-btn">Explore As Lendas</button>
+                <div id="mapa" style="display:none;">
+                    <div id="mapContainer"></div>
+                    <p id="distanciaTexto"></p>
+                </div>
             </div>
         </section>
         
@@ -147,8 +146,65 @@
         </footer>
     </div>
     
-<script src="script.js"></script>
-
+    <script>
+        let map;
+        
+        // Mostrar localização e mapa
+        document.getElementById('meuLocalBtn').addEventListener('click', function() {
+            const mapa = document.getElementById('mapa');
+            
+            if(mapa.style.display === 'none') {
+                mapa.style.display = 'block';
+                
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(showPosition);
+                } else {
+                    document.getElementById('mapContainer').innerHTML = "Geolocalização não é suportada pelo seu navegador.";
+                }
+            } else {
+                mapa.style.display = 'none';
+            }
+        });
+        
+        function showPosition(position) {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+            
+            // Coordenadas da festa (exemplo)
+            const festaLat = -23.5505;
+            const festaLon = -46.6333;
+            
+            // Calcular distância
+            const distancia = calcularDistancia(lat, lon, festaLat, festaLon);
+            document.getElementById('distanciaTexto').innerHTML = `Você está a aproximadamente ${distancia.toFixed(1)}km da festa!`;
+        }
+        
+        function calcularDistancia(lat1, lon1, lat2, lon2) {
+            const R = 6371; // Raio da Terra em km
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLon = (lon2 - lon1) * Math.PI / 180;
+            const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                      Math.sin(dLon/2) * Math.sin(dLon/2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            return R * c;
+        }
+        
+        // Efeito nas bandeirinhas
+        const bandeirinhas = document.querySelectorAll('.bandeirinha');
+        bandeirinhas.forEach((bandeirinha, index) => {
+            bandeirinha.style.animationDelay = `${index * 0.2}s`;
+            bandeirinha.addEventListener('mouseover', function() {
+                this.style.transform = 'scale(1.2)';
+            });
+            bandeirinha.addEventListener('mouseout', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+ document.getElementById('btMProximaPagina').addEventListener('click', function() {
+        window.location.href = 'fds.html';
+    });
+    </script>
 </body>
 </html>
 
