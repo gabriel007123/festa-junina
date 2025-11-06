@@ -5,7 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lendas Do Nordeste</title>
     <link rel="stylesheet" href="oloko .css">
-    
+    <!-- Incluindo Leaflet CSS e JS via CDN para o mapa -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        /* Estilos existentes (assumindo que 'oloko .css' tem mais, mas adicionando aqui para o mapa) */
+        .localizacao-btn {
+            background-color: #007bff; /* Azul */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .localizacao-btn:hover {
+            background-color: #0056b3;
+        }
+        #mapContainer {
+            height: 400px; /* Altura do mapa */
+            width: 100%;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        #distanciaTexto {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        /* Adicione mais estilos se necessário do seu CSS original */
+    </style>
 </head>
 <body>
     <div class="container">
@@ -16,7 +45,6 @@
             <div class="bandeirinha">🧙‍♂️</div>
             <div class="bandeirinha">🧚‍♀️</div>
             <div class="bandeirinha">🌾</div>
-
             </div>
             <h1>Ecos do Sertão: Lendas do Nordeste</h1>
             <p>Onde o mistério encontra a tradição!</p>
@@ -34,11 +62,8 @@
                 <h3>Curiosidades Sobre essas Lendas</h3>
                 <ul>
                     <li><strong></strong> - Curiosidade: Essa lenda urbana falava de um homem rico e doente que precisava comer fígados de crianças para se curar. </li>
-
                     <li><strong></strong> - Curiosidade: A lenda diz que uma serpente gigante dorme no fundo da lagoa e, se acordar, pode</li>
-
                     <li><strong></strong> - Curiosidade: Dizem que a Mula-sem-Cabeça é o castigo dado a uma mulher que teve um</li>
-
                     <li><strong></strong> - Curiosidade: No Nordeste, o Caipora é protetor dos animais da caatinga — quem caça sem</li>
                 </ul>
             </div>
@@ -147,50 +172,63 @@
     </div>
     
     <script>
-        let map;
-        
-        // Mostrar localização e mapa
-        document.getElementById('meuLocalBtn').addEventListener('click', function() {
-            const mapa = document.getElementById('mapa');
-            
-            if(mapa.style.display === 'none') {
-                mapa.style.display = 'block';
-                
-                if (navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(showPosition);
-                } else {
-                    document.getElementById('mapContainer').innerHTML = "Geolocalização não é suportada pelo seu navegador.";
+        let map; // Variável para o mapa
+        let markers = []; // Array para armazenar marcadores
+        let selectedMarkers = []; // Para calcular distância entre dois marcadores
+
+        // Mostrar/ocultar mapa e inicializá-lo (integrado ao botão "Explore As Lendas")
+        document.getElementById('maps.html').addEventListener('click', function() {
+            const mapaDiv = document.getElementById('mapa');
+            if (mapaDiv.style.display === 'none' || mapaDiv.style.display === '') {
+                mapaDiv.style.display = 'block';
+                if (!map) { // Inicializa o mapa apenas uma vez
+                    initMap();
                 }
             } else {
-                mapa.style.display = 'none';
+                mapaDiv.style.display = 'none';
             }
         });
-        
-        function showPosition(position) {
-            const lat = position.coords.latitude;
-            const lon = position.coords.longitude;
-            
-            // Coordenadas da festa (exemplo)
-            const festaLat = -23.5505;
-            const festaLon = -46.6333;
-            
-            // Calcular distância
-            const distancia = calcularDistancia(lat, lon, festaLat, festaLon);
-            document.getElementById('distanciaTexto').innerHTML = `Você está a aproximadamente ${distancia.toFixed(1)}km da festa!`;
+
+        // Função para inicializar o mapa (focado no Nordeste, com lendas)
+        function initMap() {
+            map = L.map('mapContainer').setView([-8.0, -38.0], 6); // Centro aproximado no Nordeste do Brasil
+
+            // Camada base
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            // Marcadores relacionados a lendas do Nordeste
+            const legendMarkers = [
+                { lat: -12.9714, lng: -38.5016, title: 'Salvador (Bahia)', desc: 'Lar de lendas afro-brasileiras como a Mula-sem-Cabeça e encantarias.' },
+                { lat: -7.2307, lng: -35.8817, title: 'Caruaru (Pernambuco)', desc: 'Histórias de Lampião e cangaço, com mitos sertanejos.' },
+                { lat: -5.7945, lng: -35.2094, title: 'Natal (Rio Grande do Norte)', desc: 'Lendas de piratas e sereias nas praias do Nordeste.' },
+                { lat: -9.3897, lng: -40.5097, title: 'Petrolina (Pernambuco)', desc: 'Mitos da caatinga, como o Caipora protetor dos animais.' },
+                { lat: -3.1190, lng: -60.0217, title: 'Floresta Amazônica (influência)', desc: 'Lendas indígenas que influenciam o folclore nordestino.' }
+            ];
+
+            legendMarkers.forEach(markerData => {
+                const marker = L.marker([markerData.lat, markerData.lng])
+                    .addTo(map)
+                    .bindPopup(`<b>${markerData.title}</b><br>${markerData.desc}`);
+                
+                // Adiciona evento de clique para calcular distância
+                marker.on('click', function() {
+                    selectedMarkers.push(marker.getLatLng());
+                    if (selectedMarkers.length === 2) {
+                        const dist = map.distance(selectedMarkers[0], selectedMarkers[1]);
+                        document.getElementById('distanciaTexto').textContent = `Distância entre os pontos: ${(dist / 1000).toFixed(2)} km`;
+                        selectedMarkers = []; // Reseta para próximos cliques
+                    }
+                });
+                
+                markers.push(marker);
+            });
+
+            // Controle de escala
+            L.control.scale().addTo(map);
         }
-        
-        function calcularDistancia(lat1, lon1, lat2, lon2) {
-            const R = 6371; // Raio da Terra em km
-            const dLat = (lat2 - lat1) * Math.PI / 180;
-            const dLon = (lon2 - lon1) * Math.PI / 180;
-            const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-                      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-                      Math.sin(dLon/2) * Math.sin(dLon/2);
-            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-            return R * c;
-        }
-        
-        // Efeito nas bandeirinhas
+
         const bandeirinhas = document.querySelectorAll('.bandeirinha');
         bandeirinhas.forEach((bandeirinha, index) => {
             bandeirinha.style.animationDelay = `${index * 0.2}s`;
@@ -201,10 +239,11 @@
                 this.style.transform = 'scale(1)';
             });
         });
- document.getElementById('btMProximaPagina').addEventListener('click', function() {
-        window.location.href = 'fds.html';
-    });
+
+        // Botão para próxima página (mantido)
+        document.getElementById('btMProximaPagina').addEventListener('click', function() {
+            window.location.href = 'fds.html';
+        });
     </script>
 </body>
 </html>
-
