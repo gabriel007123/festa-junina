@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa Interativo do Brasil</title>
+    <!-- Incluindo Leaflet CSS e JS via CDN -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        #map {
+            height: 100vh; /* Ocupa toda a altura da tela */
+            width: 100%;
+        }
+        .info-panel {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <div class="info-panel">
+        <h3>Explore o Brasil!</h3>
+        <p>Use o mouse para zoomar e navegar. Clique nos marcadores para detalhes.</p>
+    </div>
+
+    <script>
+        // Inicializando o mapa centrado no Brasil
+        const map = L.map('map').setView([-14.235, -51.925], 5); // Coordenadas aproximadas do centro do Brasil, zoom inicial 5
+
+        // Adicionando camada de mapa base (OpenStreetMap)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Adicionando marcadores com popups
+        const markers = [
+            { lat: -22.9068, lng: -43.1729, title: 'Rio de Janeiro', desc: 'Praias icônicas e o Cristo Redentor.' },
+            { lat: -23.5505, lng: -46.6333, title: 'São Paulo', desc: 'Maior cidade do Brasil, centro econômico.' },
+            { lat: -15.7942, lng: -47.8822, title: 'Brasília', desc: 'Capital moderna, arquitetura de Niemeyer.' },
+            { lat: -3.1190, lng: -60.0217, title: 'Floresta Amazônica', desc: 'Maior floresta tropical, biodiversidade incrível.' },
+            { lat: -12.9714, lng: -38.5016, title: 'Salvador (Bahia)', desc: 'História colonial e cultura afro-brasileira.' }
+        ];
+
+        markers.forEach(marker => {
+            L.marker([marker.lat, marker.lng])
+                .addTo(map)
+                .bindPopup(`<b>${marker.title}</b><br>${marker.desc}`);
+        });
+
+        // Adicionando controle de zoom e escala
+        L.control.scale().addTo(map);
+    </script>
+</body>
+</html>
